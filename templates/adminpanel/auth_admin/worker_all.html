@@ -1,0 +1,104 @@
+{% extends "adminpanel/main.html" %}
+{% block main %}
+<div class="page-inner">
+    <div class="page-header">
+        <h4 class="page-title">Workers</h4>
+        <ul class="breadcrumbs">
+            <li class="nav-home">
+                <a href="/adminpanel/">
+                    <i class="flaticon-home"></i>
+                </a>
+            </li>
+            <li class="separator">
+                <i class="flaticon-right-arrow"></i>
+            </li>
+            <li class="nav-item">
+                <a>All Workers</a>
+            </li>
+            
+        </ul>
+    </div>
+    <div class="row">
+        
+
+        <div class="col-md-12">
+            <div class="card">
+                
+                <div class="card-header">
+                    
+                    <div class="d-flex align-items-center">
+                        <h4 class="card-title">Add Row</h4>
+                        <a href="/adminpanel/auth_admin/worker_add/" class="btn btn-primary btn-round ml-auto" >
+                            <i class="fa fa-plus"></i>
+                            Add Row
+                        </a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <!-- Modal -->
+                    <div class="modal fade" id="addRowModal" tabindex="-1" role="dialog" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header no-bd">
+                                    <h5 class="modal-title">
+                                        <span class="fw-mediumbold">
+                                        New</span> 
+                                        <span class="fw-light">
+                                            Row
+                                        </span>
+                                    </h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table id="category_table" class="display table table-striped table-hover" >
+                            <thead>
+                                <tr style="color: white;">
+                                    <th>Username</th>
+                                    <th>First name</th>
+                                    <th>Last name</th>
+                                    <th>SuperUser</th>
+                                    <th>Staff</th>
+                                    <th>Last Login</th>
+                                    <th>Create at</th>
+                                    <th style="width: 10%">Action</th>
+                                </tr>
+                            </thead>
+                       
+                                {% for i in all_workers %}
+                                <tr id="worker_{{i.id}}"  style="color: rgb(190, 178, 178);">
+                                    <td>{{i.username}}</td>
+                                    <td>{{i.first_name}}</td>
+                                    <td>{{i.last_name}}</td>
+                                    <td>{{i.is_superuser}}</td>
+                                    <td>{{i.is_staff}}</td>
+                                    <td>{{i.last_login|date:"d/m/Y H:i "}}</td>
+                                    <td>{{i.date_joined|date:"d/m/Y H:i "}}</td>
+                                    <td>
+                                        <div class="form-button-action">
+                                            <a href="/adminpanel/auth_admin/worker_edit/{{i.id}}" type="button" data-toggle="tooltip" title="" class="btn btn-link btn-primary btn-lg" data-original-title="Edit Task">
+                                                <i class="fa fa-edit"></i>
+                                            </a>
+                                            <button type="button"  onclick="deleteWorker({{i.id}})" data-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Remove">
+                                                <i class="fa fa-times"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock main %}

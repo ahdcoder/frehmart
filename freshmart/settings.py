@@ -53,6 +53,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'freshmart.middlewera.simple_middleware',
+    
 ]
 
 ROOT_URLCONF = 'freshmart.urls'

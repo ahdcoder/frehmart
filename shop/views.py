@@ -22,10 +22,16 @@ def index(request):
     category = Category.objects.filter(status=2)
     category_status0 = Category.objects.filter(status=0)
     subcategory = Subcategory.objects.all()
+    product = Product.objects.all().order_by('-name')[0:5]
+    product_price = Product.objects.all().order_by('-new_price')[0:5]
+    product_create = Product.objects.all().order_by('create_at')[0:5]
     context = {
         'all_categories':category,
         'subategory':subcategory,
-        'category':category_status0
+        'category':category_status0,
+        'product_10':product,
+        'product_price':product_price,
+        'product_create':product_create,
     }
     return render(request,'shop/index.html',context)
 
@@ -264,7 +270,7 @@ def confirm_acc(request):
     if request.method == 'POST':
         if request.user.confirmcode.pincode == request.POST['confirmcode']:
             user = request.user.confirmcode
-            user.status = 1
+            user.status = True
             user.save()
             return redirect('/')
 
@@ -273,7 +279,13 @@ def confirm_acc(request):
     
 
 def logout_(request):
-    logout(request)
+    if request.user.is_superuser or request.user.is_staff:
+        logout(request)
+    elif request.user.confirmcode.status == False:
+        User.objects.get(username=request.user.username).delete()
+        return redirect('/')
+    else:
+        logout(request)
     return redirect('/')
 
 

@@ -6,7 +6,7 @@ class ConfirmCode(models.Model):
     user = models.OneToOneField(User,on_delete=models.CASCADE,related_name='confirmcode')
     pincode = models.CharField(max_length=30)
     email = models.EmailField(max_length=255)
-    status = models.SmallIntegerField(default=0)
+    status = models.BooleanField(default=False)
 
 class Cart(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE,related_name='carts')

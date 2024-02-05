@@ -1,14 +1,14 @@
-from django.shortcuts import render
-from order.models import Order
+from django.shortcuts import render,redirect
+from .forms import LoginForm
+from django.contrib.auth import authenticate,login,logout
 
 def index(request):
-    return render(request,"adminpanel/index.html")
+    if request.user.is_authenticated:
+        if request.user.is_superuser:
+            return render(request,"adminpanel/index.html")
+    else:
+        return redirect('/adminpanel/auth_login/')
 
-def order(request):
-    all_orders = Order.objects.all()
-    context = {
-        'all_order':all_orders
-    }
-    return render(request,'adminpanel/order/all.html',context)
+
 
 # Create your views here.

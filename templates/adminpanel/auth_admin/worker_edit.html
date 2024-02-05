@@ -2,7 +2,7 @@
 {% block main %}
 <div class="page-inner">
     <div class="page-header">
-        <h4 class="page-title">Products</h4>
+        <h4 class="page-title">Workers</h4>
         <ul class="breadcrumbs">
             <li class="nav-home">
                 <a href="/adminpanel/">
@@ -13,14 +13,14 @@
                 <i class="flaticon-right-arrow"></i>
             </li>
             <li class="nav-item">
-                <a href="/adminpanel/product/all/">All products</a>
+                <a href="/adminpanel/auth_admin/worker_all/">All Workers</a>
             </li>
 
             <li class="separator">
                 <i class="flaticon-right-arrow"></i>
             </li>
             <li class="nav-item">
-                <a >Add products</a>
+                <a >Edit worker</a>
             </li>
             
         </ul>
@@ -31,30 +31,37 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <div class="card-title">Add product</div>
+                    <div class="card-title">Edit Worker</div>
                 </div>
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-6 col-lg-4">
-                            <form action="" method="post" enctype="multipart/form-data">
+                            <form action="" method="post">
                                 {% csrf_token %}
                             <div class="form-group">
-                                <label >Name</label>
-                                {{form.name}}
+                                
+                                <label >First name</label>
+                                {{form.first_name}}
+                                <label >Last name</label>
+                                {{form.last_name}}
                                 <br>
-                                <label >Select Category</label>
-                                {{form.category}}
-                                <label >Select Subcategory</label>
-                                {{form.subcategory}}
+                                <label >Username</label>
+                                {{form.username}}
                                 <br>
-                                <label >New price</label>
-                                {{form.new_price}}
+                                <label >Password</label>
+                                {{form.password1}}
                                 <br>
-                                <label >Old price</label>
-                                {{form.old_price}}
+                                <label >Password (again)</label>
+                                {{form.password2}}
                                 <br>
-                                {{form.image}}
+                                <label>Super User</label>
+                                {{form.is_superuser}}
                                 <br>
+                                <label>Is staff</label>
+                                {{form.is_staff}}
+                                <br>
+                                {{form.errors}}
+
                                 <br>
                                 
                                 <button class="btn btn-success">Adding</button>
