@@ -1,0 +1,85 @@
+{% extends "adminpanel/main.html" %}
+{% block main %}
+<div class="page-inner">
+    <div class="page-header">
+        <h4 class="page-title">Orders</h4>
+        <ul class="breadcrumbs">
+            <li class="nav-home">
+                <a href="/adminpanel/">
+                    <i class="flaticon-home"></i>
+                </a>
+            </li>
+            <li class="separator">
+                <i class="flaticon-right-arrow"></i>
+            </li>
+            <li class="nav-item">
+                <a >Restore</a>
+            </li>
+            
+        </ul>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                {% comment %} <div class="card-header">
+                    <div class="d-flex align-items-center">
+                        <h4 class="card-title">Add Row</h4>
+                        <button class="btn btn-primary btn-round ml-auto" data-toggle="modal" data-target="#addRowModal">
+                            <i class="fa fa-plus"></i>
+                            Add Row
+                        </button>
+                    </div>
+                </div> {% endcomment %}
+                <div class="card-body">
+              
+        
+                    <div class="table-responsive">
+                        <table id="category_table" class="display table table-striped table-hover" >
+                            <thead>
+                                <tr style="color: white;">
+                                    <th>Name</th>
+                                    <th>Order time</th>
+                                    <th>Total Price</th>
+                                    <th style="width: 10%">Action</th>
+                                </tr>
+                            </thead>
+                           
+                                {% for i in order %}
+                                <tr id="order_{{i.id}}" style="color: rgb(190, 178, 178);">
+                                    <td>{{i.first_name}} {{i.last_name}}</td>
+                                    <td>{{i.create_at|date:"d/m/Y H:i "}}</td>
+                                    <td>{{i.cart.full_total_sum}}</td>
+                                    <td>
+                                        <div class="form-button-action">
+                                            <a href="/adminpanel/order/detail/{{i.id}}" type="button" data-toggle="tooltip" title="" class="btn btn-link btn-primary btn-lg" data-original-title="Detail">
+                                                <i class="fa icon-menu"></i>
+                                            </a>
+
+
+
+                                            <button  onclick="restoreOrder({{i.id}})" type="button" data-toggle="tooltip" title="" class="btn btn-link btn-success btn-lg" data-original-title="Detail">
+                                                <i class="fa fa-check"></i>
+                                            </button>
+
+                                            
+                                            
+                                            
+                                        </div>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                   
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+    </div>
+</div>
+
+
+
+
+{% endblock main %}

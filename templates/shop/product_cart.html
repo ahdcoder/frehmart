@@ -1,0 +1,111 @@
+{% extends "shop/main.html" %}
+{% block main %}
+			<!-- Main Content -->
+			<div id="content" class="site-content">
+				<!-- Breadcrumb -->
+				<div id="breadcrumb">
+					<div class="container">
+						<h2 class="title">Shopping Cart</h2>
+						
+						<ul class="breadcrumb">
+							<li><a href="#" title="Home">Home</a></li>
+							<li><span>Shopping Cart</span></li>
+						</ul>
+					</div>
+				</div>
+			
+				<div class="container">
+					<div class="page-cart">
+						<div class="table-responsive">
+							<table class="cart-summary table table-bordered">
+								<thead>
+									<tr>
+										<th class="width-20">&nbsp;</th>
+										<th class="width-80 text-center">Image</th>
+										<th>Name</th>
+										<th class="width-100 text-center">Unit price</th>
+										<th class="width-100 text-center">Qty</th>
+										<th class="width-100 text-center">Total</th>
+									</tr>
+								</thead>
+								
+								<tbody>
+
+									{% for i in cart.items.all %}
+									<tr>
+										<td class="product-remove">
+											<a href="/cart_delete/{{i.product.id}}" title="Remove this item" class="remove" href="#">
+												<i class="fa fa-times"></i>
+											</a>
+										</td>
+										<td>
+											<a href="product-detail-left-sidebar.html">
+												<img width="80" alt="Product Image" style="max-width: 110px;max-height: 70px;min-width: 110px;min-height: 70px;" class="img-responsive" src="{{i.product.image.url}}">
+											</a>
+										</td>
+										<td>
+											<a href="product-detail-left-sidebar.html" class="product-name">{{i.product.name}}</a>
+										</td>
+										<td class="text-center">
+											${{i.product.new_price}}
+										</td>
+										<td>
+											<div class="product-quantity">
+												<div class="qty">
+													<div class="input-group">
+														<input type="text" name="qty" value="{{i.quantity}}" data-min="1">
+														<span class="adjust-qty">
+															<a href='/addcart/{{i.product.id}}' class="adjust-btn plus">+</a>
+															<a href='/product_delete/{{i.product.id}}' class="adjust-btn minus">-</a>
+														</span>
+													</div>
+												</div>
+											</div>
+										</td>
+										<td class="text-center">
+											${{i.total_price}}
+										</td>
+									</tr>
+									{% endfor %}
+									
+								</tbody>
+								
+								<tfoot>
+									<tr class="cart-total">
+										<td rowspan="3" colspan="3"></td>
+										<td colspan="2" class="text-right">Total products</td>
+										<td colspan="1" class="text-center">${{cart.totalsum}}</td>
+									</tr>
+									<tr class="cart-total">
+										<td colspan="2" class="text-right">Total shipping</td>
+										<td colspan="1" class="text-center">${{cart.delivery}}</td>
+									</tr>
+									<tr class="cart-total">
+										<td colspan="2" class="total text-right">Total</td>
+										{% if cart.delivery == '10' %}
+										<td colspan="1" class="total text-center">${{cart.totalsum}} + {{cart.delivery}}</td>
+										{% else %}
+										<td colspan="1" class="total text-center">${{cart.totalsum}}</td>
+
+										{% endif %}
+									</tr>
+								</tfoot>
+							</table>
+						</div>
+						
+						<div class="checkout-btn">
+							<a href="/checkout/" class="btn btn-primary pull-right" title="Proceed to checkout">
+								<span>Proceed to checkout</span>
+								<i class="fa fa-angle-right ml-xs"></i>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			
+			<!-- Footer -->
+		
+{% endblock main %}	
+			<!-- Go Up button -->
+		

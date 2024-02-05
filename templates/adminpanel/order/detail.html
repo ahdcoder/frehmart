@@ -1,0 +1,108 @@
+{% extends "adminpanel/main.html" %}
+{% block main %}
+<div class="page-inner">
+    <div class="page-header">
+        <h4 class="page-title">Detail</h4>
+        <ul class="breadcrumbs">
+            <li class="nav-home">
+                <a href="/adminpanel/">
+                    <i class="flaticon-home"></i>
+                </a>
+            </li>
+            <li class="separator">
+                <i class="flaticon-right-arrow"></i>
+            </li>
+            <li class="nav-item">
+                <a href="/adminpanel/order/all/">All orders</a>
+            </li>
+            <li class="separator">
+                <i class="flaticon-right-arrow"></i>
+            </li>
+            <li class="nav-item">
+                <a href="#">Detail</a>
+            </li>
+        </ul>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">Username: {{order.cart.user.username}}</h4>
+                </div>
+                <div class="card-header">
+                    <h4 class="card-title">First name: {{order.first_name}}</h4>
+                </div>
+                <div class="card-header">
+                    <h4 class="card-title">Last name: {{order.last_name}}</h4>
+                </div>
+                <div class="card-header">
+                    <h4 class="card-title">Payment typr: {{order.payment_type}}</h4>
+                </div>
+                <div class="card-header">
+                    <h4 class="card-title">Address: {{order.address}}</h4>
+                </div>
+                <div class="card-header">
+                    <h4 class="card-title">Created at: {{order.create_at}}</h4>
+                </div>
+                <div class="card-header">
+                    <h4 class="card-title">Phone number: {{order.phone_number}}</h4>
+                </div>
+                
+                
+            </div>
+        </div>
+
+        
+
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+              
+        
+                    <div class="table-responsive">
+                        <table id="category_table" class="display table table-striped table-hover" >
+                            <thead>
+                                <tr style="color: white;">
+                                    <th>Name</th>
+                                    <th>Subcategory or Category</th>
+                                    <th>Price</th>
+                                    <th>Quatity</th>
+                                    <th>Total Price</th>
+                                    <th style="width: 10%">Action</th>
+                                </tr>
+                            </thead>
+                           
+                                {% for i in order.cart.items.all %}
+                                <tr style="color: rgb(190, 178, 178);">
+                                    <td>{{i.product.name}}</td>
+                                    <td>{% if i.product.subcategory == None %} (Category) {{i.product.category}} {% else %} (Subcategory) {{i.product.subcategory}} {% endif %}</td>
+                                    <td>{{i.product.new_price}}</td>
+                                    <td>{{i.quantity}}</td>
+                                    <td>{{i.total_price}}</td>
+                                    <td>
+                                        <div class="form-button-action">
+                                            <a href="/adminpanel/product/detail/{{i.product.id}}" type="button" data-toggle="tooltip" title="" class="btn btn-link btn-primary btn-lg" data-original-title="Detail">
+                                                <i class="fa icon-menu"></i>
+                                            </a>
+                                        
+                                        </div>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                   
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+    </div>
+</div>
+
+
+
+{% endblock main %}
