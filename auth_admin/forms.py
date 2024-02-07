@@ -11,11 +11,10 @@ class WorkerCreate(UserCreationForm):
     username = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control','name':'username'}))
     first_name = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control','name':'first_name'}))
     last_name = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control','name':'last_name'}))
-    password1 = forms.CharField(widget=forms.PasswordInput(attrs={'class':'form-control','name':'password1'}))
-    password2 = forms.CharField(widget=forms.PasswordInput(attrs={'class':'form-control','name':'paswword2'}))
+    password1 = forms.CharField(widget=forms.PasswordInput(attrs={'class':'form-control','name':'password1'}),required=False)
+    password2 = forms.CharField(widget=forms.PasswordInput(attrs={'class':'form-control','name':'paswword2'}),required=False)
     is_superuser = forms.BooleanField(required=False)
-    is_staff = forms.BooleanField(required=False)
 
     class Meta:
         model = User
-        fields = ['username','password1','password2','first_name','last_name','is_superuser','is_staff']
+        fields = ['username','password1','password2','first_name','last_name','is_superuser']

@@ -16,9 +16,11 @@ from order.models import Order
 from order.forms import OrderForm
 from django.core.paginator import Paginator,PageNotAnInteger,EmptyPage
 from django.db.models.functions import Lower
+from adminpanel.forms import CustomerForm
 
 
 def index(request):
+    form = CustomerForm()
     category = Category.objects.filter(status=2)
     category_status0 = Category.objects.filter(status=0)
     subcategory = Subcategory.objects.all()
@@ -32,6 +34,7 @@ def index(request):
         'product_10':product,
         'product_price':product_price,
         'product_create':product_create,
+        'customer_form':form
     }
     return render(request,'shop/index.html',context)
 
@@ -455,7 +458,31 @@ def search(request):
         'all_categories':category,
         'search_name':search_name
     }
-
-    
     return render(request,'shop/serach_product.html',context)
+
+def customer_add(request):
+    if request.method == 'POST':
+        customer = CustomerForm(request.POST)
+        if customer.is_valid():
+            customer_2 = customer.save(commit=False)
+            customer_2.user = request.user
+            customer_2.save()
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER','/'))
+
+def page_contact(request):
+    form = CustomerForm()
+    return render(request,'shop/page_contact.html',{'form':form})
+
+def page_about(request):
+    return render(request,'shop/page_about.html')
+
+def wishlist(request):
+    return render(request,'shop/wishlist.html')
+
+def wishlist_add(request,i):
+    product = Product.objects.get(id=i)
+    wishlist,created = Wishlist.objects.get_or_create(user=request.user)
+    wishlistitem,created = WishlistItem.objects.get_or_create(wishlist=wishlist,product=product)
+    wishlistitem.save()
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER','/'))
 # Create your views here.

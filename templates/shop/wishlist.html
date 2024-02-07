@@ -1,0 +1,84 @@
+{% extends "shop/main.html" %}
+{% block main %}
+			<!-- Main Content -->
+			<div id="content" class="site-content">
+				<!-- Breadcrumb -->
+				<div id="breadcrumb">
+					<div class="container">
+						<h2 class="title">Wishlist</h2>
+						
+						<ul class="breadcrumb">
+							<li><a href="#" title="Home">Home</a></li>
+							<li><span>Wishlist</span></li>
+						</ul>
+					</div>
+				</div>
+			
+				<div class="container">
+					<div class="page-cart">
+						<div class="table-responsive">
+							<table class="cart-summary table table-bordered">
+								<thead>
+									<tr>
+										<th class="width-20">&nbsp;</th>
+										<th class="width-80 text-center">Image</th>
+										<th>Name</th>
+										<th class="width-100 text-center">Unit price</th>
+										<th class="width-100 text-center">Qty</th>
+									
+									</tr>
+								</thead>
+								
+								<tbody>
+
+									{% for i in wishlist.wishlistitem.all %}
+									<tr>
+										<td class="product-remove">
+											<a href="/cart_delete/{{i.product.id}}" title="Remove this item" class="remove" href="#">
+												<i class="fa fa-times"></i>
+											</a>
+										</td>
+										<td>
+											<a href="product-detail-left-sidebar.html">
+												<img width="80" alt="Product Image" style="max-width: 110px;max-height: 70px;min-width: 110px;min-height: 70px;" class="img-responsive" src="{{i.product.image.url}}">
+											</a>
+										</td>
+										<td>
+											<a href="product-detail-left-sidebar.html" class="product-name">{{i.product.name}}</a>
+										</td>
+										<td class="text-center">
+											${{i.product.new_price}}
+										</td>
+										<td>
+											<div class="checkout-btn">
+												<a href="/addcart/{{i.id}}" class="btn btn-primary pull-right" title="Proceed to checkout">
+													<span>Add to cart</span>
+													<i class="fa fa-shopping-basket"></i>
+												</a>
+											</div>
+										</td>
+										
+									</tr>
+									{% endfor %}
+									
+								</tbody>
+						
+							</table>
+						</div>
+						
+						<div class="checkout-btn">
+							<a href="/product_cart/" class="btn btn-primary pull-right" title="Proceed to checkout">
+								<span>View to cart</span>
+								<i class="fa fa-angle-right ml-xs"></i>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			
+			<!-- Footer -->
+		
+{% endblock main %}	
+			<!-- Go Up button -->
+		

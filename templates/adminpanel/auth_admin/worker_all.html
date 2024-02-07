@@ -64,7 +64,6 @@
                                     <th>First name</th>
                                     <th>Last name</th>
                                     <th>SuperUser</th>
-                                    <th>Staff</th>
                                     <th>Last Login</th>
                                     <th>Create at</th>
                                     <th style="width: 10%">Action</th>
@@ -77,17 +76,17 @@
                                     <td>{{i.first_name}}</td>
                                     <td>{{i.last_name}}</td>
                                     <td>{{i.is_superuser}}</td>
-                                    <td>{{i.is_staff}}</td>
                                     <td>{{i.last_login|date:"d/m/Y H:i "}}</td>
                                     <td>{{i.date_joined|date:"d/m/Y H:i "}}</td>
                                     <td>
                                         <div class="form-button-action">
-                                            <a href="/adminpanel/auth_admin/worker_edit/{{i.id}}" type="button" data-toggle="tooltip" title="" class="btn btn-link btn-primary btn-lg" data-original-title="Edit Task">
+                                            {% comment %} <a href="/adminpanel/auth_admin/worker_edit/{{i.id}}" type="button" data-toggle="tooltip" title="" class="btn btn-link btn-primary btn-lg" data-original-title="Edit Task">
                                                 <i class="fa fa-edit"></i>
-                                            </a>
+                                            </a> {% endcomment %}
                                             <button type="button"  onclick="deleteWorker({{i.id}})" data-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Remove">
                                                 <i class="fa fa-times"></i>
                                             </button>
+                                            <a href='/adminpanel/auth_admin/change_password/{{i.id}}' class="btn btn-secondary">Change password</a>
                                         </div>
                                     </td>
                                 </tr>

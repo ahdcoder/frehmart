@@ -5,7 +5,7 @@ def simple_middleware(get_response):
     def middleware(request):
         if '/adminpanel/' in request.path:
             if not request.path == '/adminpanel/auth_admin/auth_login/':
-                if not request.user.is_superuser:
+                if not request.user.is_staff or (not request.user.is_superuser and not request.user.is_staff):
                     return redirect('/adminpanel/auth_admin/auth_login/')
                 
         if not('/' in request.path):

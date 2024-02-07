@@ -44,7 +44,16 @@ class CartItem(models.Model):
     def total_price(self):
         return self.quantity * self.product.new_price
     
-    
+
+class Wishlist(models.Model):
+    user = models.OneToOneField(User,on_delete=models.CASCADE,related_name='wishlist')
+    create_at = models.DateTimeField(auto_now_add=True)
+
+class WishlistItem(models.Model):
+    wishlist = models.ForeignKey(Wishlist,on_delete=models.CASCADE,related_name='wishlistitem')
+    product = models.ForeignKey(Product,on_delete=models.CASCADE,related_name='product')
+    create_at = models.DateTimeField(auto_now_add=True)
+
 # class Order(models.Model):
 #     first_name = models.CharField(max_length=55)
 #     last_name = models.CharField(max_length=55)

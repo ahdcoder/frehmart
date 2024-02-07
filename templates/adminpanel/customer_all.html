@@ -1,0 +1,65 @@
+{% extends "adminpanel/main.html" %}
+{% block main %}
+<div class="page-inner">
+    <div class="page-header">
+        <h4 class="page-title">Customer</h4>
+        <ul class="breadcrumbs">
+            <li class="nav-home">
+                <a href="/adminpanel/">
+                    <i class="flaticon-home"></i>
+                </a>
+            </li>
+            <li class="separator">
+                <i class="flaticon-right-arrow"></i>
+            </li>
+            <li class="nav-item">
+                <a href="/adminpanel/category/all/">All customer</a>
+            </li>
+            
+        </ul>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+              
+                <div class="card-body">
+                    <!-- Modal -->
+                    
+        
+                    <div class="table-responsive">
+                        <table id="category_table" class="display table table-striped table-hover" >
+                            <thead>
+                                <tr style="color: white;">
+                                    <th>Name</th>
+                                    <th>Username</th>
+                                    <th>Subject</th>
+                                    <th>Message</th>
+                                    <th>Create at</th>
+                                </tr>
+                            </thead>
+                           
+                                {% for i in all_customer %}
+                                <tr  style="color: rgb(190, 178, 178);">
+                                    <td>{{i.name}}</td>
+                                    <td>{{i.user}}</td>
+                                    <td>{{i.subject}}</td>
+                                    <td>{{i.message}}</td>
+                                    <td>{{i.create_at|date:"d/m/Y H:i "}}</td>
+                                    
+                                </tr>
+                                {% endfor %}
+                   
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+    </div>
+</div>
+
+
+
+
+{% endblock main %}
