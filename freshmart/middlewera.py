@@ -3,6 +3,7 @@ from django.shortcuts import render,redirect
 def simple_middleware(get_response):
 
     def middleware(request):
+        
         if '/adminpanel/' in request.path:
             if not request.path == '/adminpanel/auth_admin/auth_login/':
                 if not request.user.is_staff or (not request.user.is_superuser and not request.user.is_staff):

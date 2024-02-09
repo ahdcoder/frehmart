@@ -6,5 +6,5 @@ urlpatterns = [
     path('all/',category_all,name='all'),
     path('add/',add_category,name='add'),
     path('delete/',delete,name='delete'),
-    path('edit/<int:i>',edit,name='edit')
+    path('edit/<int:i>',edit,name='edit'),
 ]

@@ -2,6 +2,8 @@ from django.shortcuts import render,redirect
 from category.models import *
 from .forms import *
 from django.http import JsonResponse
+from rest_framework import generics
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
 def category_all(request):
     category_form = CategoryForm
@@ -49,5 +51,8 @@ def edit(request,i):
         's_category':s_category
     }
     return render(request,'adminpanel/category/edit_category.html',context)
+
+        
+
 
 # Create your views here.
