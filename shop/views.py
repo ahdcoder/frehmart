@@ -301,7 +301,7 @@ def addcart(request,i):
         cartitem.save()
         return HttpResponseRedirect(request.META.get('HTTP_REFERER','/'))
     else:
-        return redirect('/shop/user_login/')
+        return redirect('/user_login/')
     
 def product_delete(request,i):
     if request.user.is_authenticated:
@@ -480,9 +480,15 @@ def wishlist(request):
     return render(request,'shop/wishlist.html')
 
 def wishlist_add(request,i):
-    product = Product.objects.get(id=i)
-    wishlist,created = Wishlist.objects.get_or_create(user=request.user)
-    wishlistitem,created = WishlistItem.objects.get_or_create(wishlist=wishlist,product=product)
-    wishlistitem.save()
-    return HttpResponseRedirect(request.META.get('HTTP_REFERER','/'))
+    if request.method == 'POST':
+        if request.user.is_authenticated:
+            product = Product.objects.get(id=i)
+            wishlist,created = Wishlist.objects.get_or_create(user=request.user)
+            wishlistitem,created = WishlistItem.objects.get_or_create(wishlist=wishlist,product=product)
+            wishlistitem.save()
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER','/'))
+        else:
+            return redirect('/user_login/')
+
 # Create your views here.
+        

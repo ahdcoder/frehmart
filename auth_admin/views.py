@@ -37,46 +37,59 @@ def worker_all(request):
         return redirect('/adminpanel/')
 
 def worker_add(request):
-    if request.method == 'POST':
-        form = WorkerCreate(request.POST)
+    if request.user.is_superuser:
 
-        if form.is_valid():
-            user = form.save(commit=False)
-            if user.is_superuser:
-                user.is_superuser = True
-                user.is_staff = True
-                user.save()
-            else:
-                user.is_staff = True
-                user.save()
-            return redirect('/adminpanel/')     
+        if request.method == 'POST':
+
+                form = WorkerCreate(request.POST)
+
+                if form.is_valid():
+                    user = form.save(commit=False)
+                    if user.is_superuser:
+                        user.is_superuser = True
+                        user.is_staff = True
+                        user.save()
+                    else:
+                        user.is_staff = True
+                        user.save()
+                    return redirect('/adminpanel/auth_admin/worker_all/') 
+            
+        else:
+            form = WorkerCreate()
+        context = {
+            'form':form
+        }
+        return render(request,'adminpanel/auth_admin/worker_add.html',context)
     else:
-        form = WorkerCreate()
-    context = {
-        'form':form
-    }
-    return render(request,'adminpanel/auth_admin/worker_add.html',context)
+        return redirect('/adminpanel/')   
 
 
 
 
 def worker_delete(request):
-    if request.method == 'POST':
-        worker_id = request.POST.get('worker_id')
-        worker = User.objects.get(id=worker_id)
-        worker.delete()
-        return JsonResponse({},status=200)
+    if request.user.is_superuser:
+        if request.method == 'POST':
+                worker_id = request.POST.get('worker_id')
+                worker = User.objects.get(id=worker_id)
+                worker.delete()
+                return JsonResponse({},status=200)
+        else:
+            return JsonResponse({},status=200)
     else:
-        return JsonResponse({},status=200)
+        return redirect('/adminpanel/')    
     
 def change_password(request,i):
-    user = User.objects.get(id=i)
-    if request.method == 'POST':
-        new_pass = request.POST.get('passowrd_1')
-        user.set_password(new_pass)
-        user.save()
-        return redirect('/adminpanel/auth_admin/worker_all/')
-    return render(request,'adminpanel/auth_admin/change_password.html',{'user':user})
+    if request.user.is_superuser:
+        user = User.objects.get(id=i)
+        if request.method == 'POST':
+            new_pass = request.POST.get('passowrd_1')
+            user.set_password(new_pass)
+            user.save()
+            return redirect('/adminpanel/auth_admin/worker_all/')
+        return render(request,'adminpanel/auth_admin/change_password.html',{'user':user})
+    else:
+        return redirect('/adminpanel/')    
+
     
 
 # Create your views here.

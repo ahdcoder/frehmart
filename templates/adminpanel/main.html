@@ -300,7 +300,11 @@
 							<a data-toggle="collapse" href="#collapseExample" aria-expanded="true">
 								<span>
 									{{user.username}}
+									{% if user.is_superuser %}
 									<span class="user-level">Administrator</span>
+									{% else %}
+									<span class="user-level">Manager</span>
+									{% endif %}
 									<span class="caret"></span>
 								</span>
 							</a>

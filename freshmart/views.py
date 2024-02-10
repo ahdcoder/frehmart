@@ -1,4 +1,4 @@
-from django import shortcuts
+from django.shortcuts import render
 from django.http import Http404
 from requests import Response
 from rest_framework.views import APIView
@@ -11,6 +11,10 @@ from rest_framework.permissions import IsAuthenticatedOrReadOnly,IsAdminUser,IsA
 from rest_framework.authentication import TokenAuthentication
 from .permissions import IsAdminOrReadOnly
 from rest_framework.pagination import PageNumberPagination
+
+
+def error_404(request):
+    return render(request,'404.html')
 
 class CategoryAPIListPagination(PageNumberPagination):
     page_size = 2

@@ -68,13 +68,13 @@
 						
 							{% for i in all_categories %}
 							<div class="item">
-								<span class="arrow collapsed" data-toggle="collapse" data-target="#{{i.name}}" aria-expanded="false" role="button">
+								<span class="arrow collapsed" data-toggle="collapse" data-target="#{{i.id}}" aria-expanded="false" role="button">
 									<i class="fa fa-angle-down" aria-hidden="true"></i>
 									<i class="fa fa-angle-right" aria-hidden="true"></i>
 								</span>
 								
 								<a class="category-title" >{{i.name}}</a>
-								<div class="sub-category collapse" id="{{i.name}}" aria-expanded="true" role="main">
+								<div class="sub-category collapse" id="{{i.id}}" aria-expanded="true" role="main">
 									{% for y in i.category_of_subcategory.all %}
 									<div class="item">
 										<a href="/category/{{y.id}}">{{y.name}}</a>
@@ -105,93 +105,50 @@
 						
 						<div class="block-content">
 							<div class="products owl-theme owl-carousel">
-								<div class="product-item">
-									<div class="product-image">
-										<a href="/product_detail/{{i.id}}">
-											<img src="{% static 'shop/img/product/4.jpg' %}" alt="Product Image">
-										</a>
-									</div>
-									
-									<div class="product-countdown" data-date="2018/11/28">
-									</div>
-									
-									<div class="product-title">
-										<a href="/product_detail/{{i.id}}">
-											Organic Strawberry Fruits
-										</a>
-									</div>
-									
-									<div class="product-rating">
-										<div class="star on"></div>
-										<div class="star on"></div>
-										<div class="star on "></div>
-										<div class="star on"></div>
-										<div class="star"></div>
-									</div>
-									
-									<div class="product-price">
-										<span class="sale-price">$80.00</span>
-										<span class="base-price">$90.00</span>
-									</div>
-									
-									<div class="product-buttons">
-										<a class="add-to-cart" href="#">
-											<i class="fa fa-shopping-basket" aria-hidden="true"></i>
-										</a>
+								{% for i in product_10 %}
+										<div class="product-item">
+											<div class="product-image">
+												<a href="/product_detail/{{i.id}}">
+													<img style="max-width: 200px;min-height: 200px;max-height: 200px;min-width: 200px;" src="{{i.image.url}}" alt="Product Image">
+												</a>
+											</div>
+											
+											<div class="product-title">
+												<a href="/product_detail/{{i.id}}">
+													{{i.name}}s
+												</a>
+											</div>
+											
+											{% comment %} <div class="product-rating">
+												<div class="star on"></div>
+												<div class="star on"></div>
+												<div class="star on "></div>
+												<div class="star on"></div>
+												<div class="star"></div>
+											</div> {% endcomment %}
+											
+											<div class="product-price">
+												<span class="sale-price">${{i.new_price}}</span>
+												<span class="base-price">${{i.old_price}}</span>
+											</div>
+											
+											<div class="product-buttons">
+												<a class="add-to-cart" href="/addcart/{{i.id}}">
+													<i class="fa fa-shopping-basket" aria-hidden="true"></i>
+												</a>
+												
+												<a class="add-wishlist" href="/wishlist_add/{{i.id}}">
+													<i class="fa fa-heart" aria-hidden="true"></i>												
+												</a>
+												
+												<a class="quickview" href="/product_detail/{{i.id}}">
+													<i class="fa fa-eye" aria-hidden="true"></i>
+												</a>
+											</div>
+										</div>
 										
-										<a class="add-wishlist" href="/wishlist_add/{{i.id}}">
-											<i class="fa fa-heart" aria-hidden="true"></i>												
-										</a>
-										
-										<a class="quickview" href="#">
-											<i class="fa fa-eye" aria-hidden="true"></i>
-										</a>
-									</div>
-								</div>
+										{% endfor %}
 								
-								<div class="product-item">
-									<div class="product-image">
-										<a href="/product_detail/{{i.id}}">
-											<img src="{% static 'shop/img/product/18.jpg' %}" alt="Product Image">
-										</a>
-									</div>
-									
-									<div class="product-countdown" data-date="2018/12/18">
-									</div>
-									
-									<div class="product-title">
-										<a href="/product_detail/{{i.id}}">
-											Organic Strawberry Fruits
-										</a>
-									</div>
-									
-									<div class="product-rating">
-										<div class="star on"></div>
-										<div class="star on"></div>
-										<div class="star on "></div>
-										<div class="star on"></div>
-										<div class="star"></div>
-									</div>
-									
-									<div class="product-price">
-										<span class="sale-price">$80.00</span>
-										<span class="base-price">$90.00</span>
-									</div>
-									
-									<div class="product-buttons">
-										<a class="add-to-cart" href="#">
-											<i class="fa fa-shopping-basket" aria-hidden="true"></i>
-										</a>
-										
-										<a class="add-wishlist" href="/wishlist_add/{{i.id}}">
-											<i class="fa fa-heart" aria-hidden="true"></i>												
-										</a>
-										
-										<a class="quickview" href="#">
-											<i class="fa fa-eye" aria-hidden="true"></i>
-										</a>
-									</div>
-								</div>
 							</div>
 						</div>
 					</div>

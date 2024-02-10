@@ -5,7 +5,7 @@ from .models import Subcategory
 class SubcategoryForm(forms.ModelForm):
     name = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control'}))
     category = forms.ModelChoiceField(queryset=Category.objects.all(),widget=forms.Select(attrs={'class':'form-control'}))
-    icon = forms.ImageField()
+    icon = forms.ImageField(required=False)
 
     class Meta:
         model = Subcategory
